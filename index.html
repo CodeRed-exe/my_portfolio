@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dhruv Jadhav – Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #0a0a0f;
+      color: #fff;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Glowing cursor */
+    .cursor {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #b26cf6;
+      border-radius: 50%;
+      position: fixed;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      box-shadow: 0 0 20px #b26cf6;
+      transition: transform 0.1s ease;
+      z-index: 9999;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      background: rgba(0, 0, 0, 0.6);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(128, 0, 255, 0.3);
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      color: #b26cf6;
+      letter-spacing: 1px;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #b26cf6;
+    }
+
+    /* Banner */
+    .banner {
+  width: 100%;
+  height: 150px; /* you can adjust height if needed */
+  background: url('https://images.unsplash.com/photo-1673235966910-f2a443bdbaaf?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cHVycGxlJTIwdGVjaHxlbnwwfHwwfHx8MA%3D%3D') center center / cover no-repeat;
+  margin-top: 80px;
+  position: relative;
+  border-bottom: 2px solid rgba(178, 108, 246, 0.4);
+  box-shadow: 0 4px 20px rgba(178, 108, 246, 0.3);
+}
+
+    /* Hero section with profile */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      background: linear-gradient(135deg, #090014, #1a0033);
+      padding: 100px 20px 120px;
+    }
+
+    .hero img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #b26cf6;
+      box-shadow: 0 0 20px #b26cf6;
+      margin-bottom: 20px;
+    }
+
+    .hero h2 {
+      font-size: 3rem;
+      color: #b26cf6;
+      text-shadow: 0 0 15px #b26cf6;
+      animation: glow 3s ease-in-out infinite alternate;
+    }
+
+    .hero p {
+      margin-top: 15px;
+      font-size: 1.2rem;
+      color: #ccc;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #b26cf6; }
+      to { text-shadow: 0 0 20px #b26cf6, 0 0 30px #b26cf6; }
+    }
+
+    section {
+      padding: 100px 10%;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .about, .projects, .contact {
+      text-align: center;
+    }
+
+    .about h2, .projects h2, .contact h2 {
+      color: #f7f6f8;
+      margin-bottom: 20px;
+      font-size: 2rem;
+    }
+
+    .about p {
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.8;
+      color: #ccc;
+    }
+
+    /* Tech Stacks */
+.tech-stacks {
+  text-align: center;
+  padding: 100px 10%;
+}
+
+.tech-stacks h2 {
+  color: #f7f6f8;
+  margin-bottom: 40px;
+  font-size: 2rem;
+}
+
+.tech-scroll {
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+
+.tech-track {
+  display: inline-flex;
+  gap: 60px;
+  animation: scroll 20s linear infinite;
+}
+
+.tech-track img {
+  width: 80px;
+  height: 80px;
+  filter: drop-shadow(0 0 8px #b26cf6);
+  transition: transform 0.3s ease;
+}
+
+.tech-track img:hover {
+  transform: scale(1.1);
+}
+
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* On My Radar */
+.on-my-radar {
+  text-align: center;
+  padding: 100px 10%;
+}
+
+.on-my-radar h2 {
+  color: #f7f6f8;
+  margin-bottom: 40px;
+  font-size: 2rem;
+}
+
+.radar-scroll {
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+
+.radar-track {
+  display: inline-flex;
+  gap: 60px;
+  animation: scrollReverse 22s linear infinite;
+}
+
+.radar-track img {
+  width: 80px;
+  height: 80px;
+  filter: drop-shadow(0 0 8px #b26cf6);
+  transition: transform 0.3s ease;
+}
+
+.radar-track img:hover {
+  transform: scale(1.1);
+}
+
+@keyframes scrollReverse {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
+
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .project {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(178, 108, 246, 0.3);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .project:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 25px rgba(178, 108, 246, 0.8);
+    }
+
+    .project img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .project h3 {
+      margin: 15px 0 10px;
+      color: #fbfbfb;
+    }
+
+    .project p {
+      font-size: 0.9rem;
+      color: #ccc;
+      padding: 0 15px 20px;
+    }
+
+    .contact {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 0 20px rgba(178, 108, 246, 0.3);
+    }
+
+    .contact form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      max-width: 400px;
+      margin: 20px auto 0;
+    }
+
+    .contact input, .contact textarea {
+      padding: 10px;
+      border: 2px solid #b26cf6;
+      border-radius: 10px;
+      background: transparent;
+      color: #fff;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    .contact button {
+      padding: 10px;
+      background: #b26cf6;
+      border: none;
+      border-radius: 10px;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .contact button:hover {
+      background: #8e43e7;
+    }
+    
+    /* Collaboration Section */
+.collab {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 80px 20px;
+  border-radius: 20px;
+  margin: 60px 10%;
+  box-shadow: 0 0 20px rgba(178, 108, 246, 0.3);
+}
+
+.collab h2 {
+  font-size: 2rem;
+  color: #b26cf6;
+  margin-bottom: 10px;
+}
+
+.collab p {
+  color: #ccc;
+  margin-bottom: 25px;
+  font-size: 1.1rem;
+}
+
+.collab-btn {
+  display: inline-block;
+  background: #b26cf6;
+  color: #fff;
+  padding: 12px 30px;
+  border-radius: 10px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.collab-btn:hover {
+  background: #8e43e7;
+}
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.05);
+      border-top: 1px solid rgba(128, 0, 255, 0.3);
+    }
+
+    footer p {
+      color: #999;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="cursor"></div>
+
+  <header>
+    <h1>Dhruv Jadhav</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <div class="banner"><img src="https://images.unsplash.com/photo-1673235966910-f2a443bdbaaf?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cHVycGxlJTIwdGVjaHxlbnwwfHwwfHx8MA%3D%3D" alt="banner" /></div>
+
+  <section class="hero" id="home">
+    <img src="https://i.pinimg.com/474x/6e/ec/3a/6eec3a1e1a970151598daf840813ff5e.jpg" alt="Cartoon Walrus" />
+    <h2>Hey, I’m Dhruv Jadhav</h2>
+    <p>Futuristic Developer | Always Learning | Building Cool Stuff 🚀</p>
+  </section>
+
+  <section class="about" id="about">
+    <h2>About Me</h2>
+    <p>I'm Dhruv Jadhav, currently studying at Scaler School of Technology while pursuing my BS in Data Science from IIT Madras. I'm passionate about coding, problem-solving, and web development. Although I’m just starting my journey, I’m eager to learn, adapt, and build cool things that make an impact.</p>
+  </section>
+
+    <!-- Tech Stacks Section -->
+  <section class="tech-stacks" id="tech-stacks">
+    <h2>Tech Stacks</h2>
+    <div class="tech-scroll">
+      <div class="tech-track">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" />
+        <!-- Repeat for continuous scroll -->
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" />
+      </div>
+    </div>
+  </section>
+
+    <!-- On My Radar Section -->
+  <section class="on-my-radar" id="on-my-radar">
+    <h2>On My Radar</h2>
+    <div class="radar-scroll">
+      <div class="radar-track">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="ReactJS" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" alt="Express.js" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" alt="TailwindCSS" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap" />
+        <!-- Repeat for smooth scroll -->
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="ReactJS" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" alt="Express.js" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" alt="TailwindCSS" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap" />
+      </div>
+    </div>
+  </section>
+
+
+
+  <section class="projects" id="projects">
+    <h2>Projects</h2>
+    <div class="project-grid">
+      <div class="project">
+        <img src="https://source.unsplash.com/800x600/?portfolio,web" alt="Portfolio Website" />
+        <h3>Portfolio Website</h3>
+        <p>The site you’re viewing right now! Built with HTML, CSS & minimal JS — futuristic, clean, and interactive.</p>
+      </div>
+      <div class="project">
+        <img src="https://source.unsplash.com/800x600/?ai,code" alt="AI Project" />
+        <h3>AI Chat UI (Coming Soon)</h3>
+        <p>A sleek chat interface inspired by futuristic AI design — under development.</p>
+      </div>
+      <div class="project">
+        <img src="https://source.unsplash.com/800x600/?data,visualization" alt="Dashboard" />
+        <h3>Interactive Dashboard (Coming Soon)</h3>
+        <p>A cool data dashboard design using modern UI techniques and animations.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <h2>Contact Me</h2>
+    <p>Email: <strong>dhruvjadhav560@gmail.com</strong></p>
+    <p>GitHub: <strong>CodeRed-exe</strong></p>
+    <p>Instagram: <strong>@dumb.dhruv_</strong></p>
+
+    <form>
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Your Email" required />
+      <textarea rows="4" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+    <!-- Collaboration Section -->
+  <section class="collab">
+    <h2>Ready to Collaborate?</h2>
+    <p>Whether you’ve got a project in mind or just want to connect, feel free to reach out!</p>
+    <a href="#contact" class="collab-btn">Send a Message</a>
+  </section>
+
+
+  <footer>
+    <p>© 2025 Dhruv Jadhav | Built with 💜 passion and curiosity</p>
+  </footer>
+
+  <script>
+    // glowing cursor
+    const cursor = document.querySelector('.cursor');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+
+    // scroll animations
+    const sections = document.querySelectorAll('section');
+    const revealSections = () => {
+      const triggerBottom = window.innerHeight * 0.8;
+      sections.forEach(sec => {
+        const secTop = sec.getBoundingClientRect().top;
+        if (secTop < triggerBottom) sec.classList.add('visible');
+      });
+    };
+    window.addEventListener('scroll', revealSections);
+    revealSections();
+  </script>
+</body>
+</html>
