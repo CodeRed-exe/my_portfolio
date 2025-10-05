@@ -33,6 +33,7 @@
       transition: transform 0.1s ease;
       z-index: 9999;
     }
+    
 
     header {
       display: flex;
@@ -303,13 +304,17 @@
     }
     
     /* Collaboration Section */
+/* Collaboration Section */
 .collab {
   text-align: center;
   background: rgba(255, 255, 255, 0.05);
   padding: 80px 20px;
   border-radius: 20px;
-  margin: 60px 10%;
+  margin: 60px auto 0; /* removed bottom margin gap */
+  max-width: 900px; /* keeps it centered and neat */
   box-shadow: 0 0 20px rgba(178, 108, 246, 0.3);
+  position: relative;
+  z-index: 2;
 }
 
 .collab h2 {
@@ -322,6 +327,7 @@
   color: #ccc;
   margin-bottom: 25px;
   font-size: 1.1rem;
+  line-height: 1.6;
 }
 
 .collab-btn {
@@ -332,24 +338,144 @@
   border-radius: 10px;
   font-weight: bold;
   text-decoration: none;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .collab-btn:hover {
   background: #8e43e7;
+  transform: translateY(-2px);
 }
 
-    footer {
-      text-align: center;
-      padding: 30px;
-      background: rgba(255, 255, 255, 0.05);
-      border-top: 1px solid rgba(128, 0, 255, 0.3);
-    }
+/* Responsive tweak for small screens */
+@media (max-width: 768px) {
+  .collab {
+    margin: 40px 5% 0;
+    padding: 60px 15px;
+  }
 
-    footer p {
-      color: #999;
-      font-size: 0.9rem;
-    }
+  .collab h2 {
+    font-size: 1.6rem;
+  }
+
+  .collab p {
+    font-size: 1rem;
+  }
+}
+
+
+#footer {
+  background: linear-gradient(180deg, rgba(15, 5, 25, 0.95), rgba(50, 0, 80, 0.9));
+  text-align: center;
+  padding: 60px 20px;
+  border-top: 2px solid rgba(178, 108, 246, 0.6);
+  box-shadow: 0 -2px 20px rgba(178, 108, 246, 0.4);
+  animation: footerGlow 3s ease-in-out infinite alternate;
+}
+
+#footer h3 {
+  color: #fff;
+  font-size: 1.8rem;
+  margin-bottom: 25px;
+  text-shadow: 0 0 10px #b26cf6;
+}
+
+#footer .footer-links {
+  margin-bottom: 15px;
+}
+
+#footer .footer-links a {
+  color: #bda8ff;
+  margin: 0 15px;
+  text-decoration: none;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+#footer .footer-links a:hover {
+  color: #fff;
+  text-shadow: 0 0 10px #b26cf6;
+}
+
+#footer p {
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+@keyframes footerGlow {
+  from { box-shadow: 0 0 15px rgba(178,108,246,0.3); }
+  to { box-shadow: 0 0 25px rgba(178,108,246,0.7); }
+}
+
+html, body {
+  height: auto;
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+section, .colab {
+  position: relative;
+  z-index: 1;
+}
+
+#footer {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+#footer {
+  margin-top: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+  .collab {
+    margin: 40px 5%;
+    padding: 60px 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  header nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .hero, .about, .projects, .contact, .tech-stacks, .on-my-radar {
+    padding: 60px 10px;
+  }
+  .footer-content h3 {
+    font-size: 1.3rem;
+  }
+  .footer-links a {
+    display: block;
+    margin: 8px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 1.6rem;
+  }
+  .collab-btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+  footer {
+    padding: 30px 10px;
+  }
+}
+
+
+
   </style>
 </head>
 <body>
@@ -431,18 +557,19 @@
   <section class="projects" id="projects">
     <h2>Projects</h2>
     <div class="project-grid">
-      <div class="project">
-        <img src="https://source.unsplash.com/800x600/?portfolio,web" alt="Portfolio Website" />
-        <h3>Portfolio Website</h3>
-        <p>The site you’re viewing right now! Built with HTML, CSS & minimal JS — futuristic, clean, and interactive.</p>
+      <div class="project" >
+        <img src="https://i.postimg.cc/bNTcpbtS/temp-Image-PC2lk9.avif"  alt="Portfolio Website" />
+        <h3 >Portfolio Website</h3>
+        <p >The site you’re viewing right now! Built with HTML, CSS & minimal JS — futuristic, clean, and interactive.</p>
+        <a href="https://codered-exe.github.io/my_portfolio/"  >CLICK HERE</a>
       </div>
       <div class="project">
-        <img src="https://source.unsplash.com/800x600/?ai,code" alt="AI Project" />
+        <img src="https://i.postimg.cc/CMcs0xKY/temp-Image-HDIQul.avif" alt="AI Project" />
         <h3>AI Chat UI (Coming Soon)</h3>
         <p>A sleek chat interface inspired by futuristic AI design — under development.</p>
       </div>
       <div class="project">
-        <img src="https://source.unsplash.com/800x600/?data,visualization" alt="Dashboard" />
+        <img src="https://img.freepik.com/free-vector/infographic-dashboard-user-panel_52683-30026.jpg?semt=ais_hybrid&w=740&q=80" alt="Dashboard" />
         <h3>Interactive Dashboard (Coming Soon)</h3>
         <p>A cool data dashboard design using modern UI techniques and animations.</p>
       </div>
@@ -470,11 +597,6 @@
     <a href="#contact" class="collab-btn">Send a Message</a>
   </section>
 
-
-  <footer>
-    <p>© 2025 Dhruv Jadhav | Built with 💜 passion and curiosity</p>
-  </footer>
-
   <script>
     // glowing cursor
     const cursor = document.querySelector('.cursor');
@@ -495,5 +617,21 @@
     window.addEventListener('scroll', revealSections);
     revealSections();
   </script>
+
+ <footer id="footer">
+  <h3>Dhruv Jadhav</h3>
+  <div class="footer-links">
+    <a href="mailto:dhruvjadhav560@gmail.com">Email</a>
+    <a href="https://github.com/CodeRed-exe">GitHub</a>
+    <a href="#">LinkedIn</a>
+    <a href="https://www.instagram.com/dumb.dhruv_">Instagram</a>
+  </div>
+  <p>© 2025 Dhruv Jadhav. All rights reserved.</p>
+</footer>
+
+
+
+  
+
 </body>
 </html>
