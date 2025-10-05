@@ -20,20 +20,13 @@
       position: relative;
     }
 
-    /* Glowing cursor */
-    .cursor {
-      width: 20px;
-      height: 20px;
-      border: 2px solid #b26cf6;
-      border-radius: 50%;
-      position: fixed;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      box-shadow: 0 0 20px #b26cf6;
-      transition: transform 0.1s ease;
-      z-index: 9999;
+  
+
+    @keyframes cursorPulse {
+      0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+      50% { transform: translate(-50%, -50%) scale(1.4); opacity: 0.4; }
+      100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
     }
-    
 
     header {
       display: flex;
@@ -67,18 +60,16 @@
       color: #b26cf6;
     }
 
-    /* Banner */
     .banner {
-  width: 100%;
-  height: 150px; /* you can adjust height if needed */
-  background: url('https://images.unsplash.com/photo-1673235966910-f2a443bdbaaf?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cHVycGxlJTIwdGVjaHxlbnwwfHwwfHx8MA%3D%3D') center center / cover no-repeat;
-  margin-top: 80px;
-  position: relative;
-  border-bottom: 2px solid rgba(178, 108, 246, 0.4);
-  box-shadow: 0 4px 20px rgba(178, 108, 246, 0.3);
-}
+      width: 100%;
+      height: 150px;
+      background: url('https://images.unsplash.com/photo-1673235966910-f2a443bdbaaf?fm=jpg&q=60&w=3000') center center / cover no-repeat;
+      margin-top: 80px;
+      position: relative;
+      border-bottom: 2px solid rgba(178, 108, 246, 0.4);
+      box-shadow: 0 4px 20px rgba(178, 108, 246, 0.3);
+    }
 
-    /* Hero section with profile */
     .hero {
       display: flex;
       flex-direction: column;
@@ -86,6 +77,7 @@
       text-align: center;
       background: linear-gradient(135deg, #090014, #1a0033);
       padding: 100px 20px 120px;
+      animation: fadeInUp 1s ease-in-out both;
     }
 
     .hero img {
@@ -113,19 +105,23 @@
 
     @keyframes glow {
       from { text-shadow: 0 0 5px #b26cf6; }
-      to { text-shadow: 0 0 20px #b26cf6, 0 0 30px #b26cf6; }
+      to { text-shadow: 0 0 30px #b26cf6; }
     }
 
     section {
       padding: 100px 10%;
-      opacity: 0;
-      transform: translateY(50px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
+      animation: fadeInUp 1s ease-in-out both;
     }
 
-    section.visible {
-      opacity: 1;
-      transform: translateY(0);
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(60px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .about, .projects, .contact {
@@ -146,86 +142,56 @@
     }
 
     /* Tech Stacks */
-.tech-stacks {
-  text-align: center;
-  padding: 100px 10%;
-}
+    .tech-stacks, .on-my-radar {
+      text-align: center;
+      padding: 100px 10%;
+    }
 
-.tech-stacks h2 {
-  color: #f7f6f8;
-  margin-bottom: 40px;
-  font-size: 2rem;
-}
+    .tech-stacks h2, .on-my-radar h2 {
+      color: #f7f6f8;
+      margin-bottom: 40px;
+      font-size: 2rem;
+    }
 
-.tech-scroll {
-  overflow: hidden;
-  white-space: nowrap;
-  position: relative;
-}
+    .tech-scroll, .radar-scroll {
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+    }
 
-.tech-track {
-  display: inline-flex;
-  gap: 60px;
-  animation: scroll 20s linear infinite;
-}
+    .tech-track, .radar-track {
+      display: inline-flex;
+      gap: 60px;
+    }
 
-.tech-track img {
-  width: 80px;
-  height: 80px;
-  filter: drop-shadow(0 0 8px #b26cf6);
-  transition: transform 0.3s ease;
-}
+    .tech-track {
+      animation: scroll 20s linear infinite;
+    }
 
-.tech-track img:hover {
-  transform: scale(1.1);
-}
+    .radar-track {
+      animation: scrollReverse 22s linear infinite;
+    }
 
-@keyframes scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
+    @keyframes scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
 
-/* On My Radar */
-.on-my-radar {
-  text-align: center;
-  padding: 100px 10%;
-}
+    @keyframes scrollReverse {
+      from { transform: translateX(-50%); }
+      to { transform: translateX(0); }
+    }
 
-.on-my-radar h2 {
-  color: #f7f6f8;
-  margin-bottom: 40px;
-  font-size: 2rem;
-}
+    .tech-track img, .radar-track img {
+      width: 80px;
+      height: 80px;
+      filter: drop-shadow(0 0 8px #b26cf6);
+      transition: transform 0.3s ease;
+    }
 
-.radar-scroll {
-  overflow: hidden;
-  white-space: nowrap;
-  position: relative;
-}
-
-.radar-track {
-  display: inline-flex;
-  gap: 60px;
-  animation: scrollReverse 22s linear infinite;
-}
-
-.radar-track img {
-  width: 80px;
-  height: 80px;
-  filter: drop-shadow(0 0 8px #b26cf6);
-  transition: transform 0.3s ease;
-}
-
-.radar-track img:hover {
-  transform: scale(1.1);
-}
-
-@keyframes scrollReverse {
-  from { transform: translateX(-50%); }
-  to { transform: translateX(0); }
-}
-
-
+    .tech-track img:hover, .radar-track img:hover {
+      transform: scale(1.1);
+    }
 
     .project-grid {
       display: grid;
@@ -302,185 +268,78 @@
     .contact button:hover {
       background: #8e43e7;
     }
-    
-    /* Collaboration Section */
-/* Collaboration Section */
-.collab {
-  text-align: center;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 80px 20px;
-  border-radius: 20px;
-  margin: 60px auto 0; /* removed bottom margin gap */
-  max-width: 900px; /* keeps it centered and neat */
-  box-shadow: 0 0 20px rgba(178, 108, 246, 0.3);
-  position: relative;
-  z-index: 2;
-}
 
-.collab h2 {
-  font-size: 2rem;
-  color: #b26cf6;
-  margin-bottom: 10px;
-}
+    .collab {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 80px 20px;
+      border-radius: 20px;
+      margin: 60px auto 0;
+      max-width: 900px;
+      box-shadow: 0 0 20px rgba(178, 108, 246, 0.3);
+    }
 
-.collab p {
-  color: #ccc;
-  margin-bottom: 25px;
-  font-size: 1.1rem;
-  line-height: 1.6;
-}
+    .collab h2 {
+      font-size: 2rem;
+      color: #b26cf6;
+      margin-bottom: 10px;
+    }
 
-.collab-btn {
-  display: inline-block;
-  background: #b26cf6;
-  color: #fff;
-  padding: 12px 30px;
-  border-radius: 10px;
-  font-weight: bold;
-  text-decoration: none;
-  transition: background 0.3s ease, transform 0.2s ease;
-}
+    .collab p {
+      color: #ccc;
+      margin-bottom: 25px;
+      font-size: 1.1rem;
+    }
 
-.collab-btn:hover {
-  background: #8e43e7;
-  transform: translateY(-2px);
-}
+    .collab-btn {
+      display: inline-block;
+      background: #b26cf6;
+      color: #fff;
+      padding: 12px 30px;
+      border-radius: 10px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
 
-/* Responsive tweak for small screens */
-@media (max-width: 768px) {
-  .collab {
-    margin: 40px 5% 0;
-    padding: 60px 15px;
-  }
+    .collab-btn:hover {
+      background: #8e43e7;
+      transform: translateY(-2px);
+    }
 
-  .collab h2 {
-    font-size: 1.6rem;
-  }
+    #footer {
+      background: linear-gradient(180deg, rgba(15, 5, 25, 0.95), rgba(50, 0, 80, 0.9));
+      text-align: center;
+      padding: 60px 20px;
+      border-top: 2px solid rgba(178, 108, 246, 0.6);
+      box-shadow: 0 -2px 20px rgba(178, 108, 246, 0.4);
+    }
 
-  .collab p {
-    font-size: 1rem;
-  }
-}
+    #footer h3 {
+      color: #fff;
+      font-size: 1.8rem;
+      margin-bottom: 25px;
+      text-shadow: 0 0 10px #b26cf6;
+    }
 
+    #footer a {
+      color: #bda8ff;
+      margin: 0 15px;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
 
-#footer {
-  background: linear-gradient(180deg, rgba(15, 5, 25, 0.95), rgba(50, 0, 80, 0.9));
-  text-align: center;
-  padding: 60px 20px;
-  border-top: 2px solid rgba(178, 108, 246, 0.6);
-  box-shadow: 0 -2px 20px rgba(178, 108, 246, 0.4);
-  animation: footerGlow 3s ease-in-out infinite alternate;
-}
+    #footer a:hover {
+      color: #fff;
+    }
 
-#footer h3 {
-  color: #fff;
-  font-size: 1.8rem;
-  margin-bottom: 25px;
-  text-shadow: 0 0 10px #b26cf6;
-}
-
-#footer .footer-links {
-  margin-bottom: 15px;
-}
-
-#footer .footer-links a {
-  color: #bda8ff;
-  margin: 0 15px;
-  text-decoration: none;
-  transition: color 0.3s ease, text-shadow 0.3s ease;
-}
-
-#footer .footer-links a:hover {
-  color: #fff;
-  text-shadow: 0 0 10px #b26cf6;
-}
-
-#footer p {
-  color: #aaa;
-  font-size: 0.9rem;
-}
-
-@keyframes footerGlow {
-  from { box-shadow: 0 0 15px rgba(178,108,246,0.3); }
-  to { box-shadow: 0 0 25px rgba(178,108,246,0.7); }
-}
-
-html, body {
-  height: auto;
-  min-height: 100%;
-  overflow-x: hidden;
-}
-
-section, .colab {
-  position: relative;
-  z-index: 1;
-}
-
-#footer {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  bottom: 0;
-  left: 0;
-}
-
-body {
-  display: flex;
-  flex-direction: column;
-}
-
-#footer {
-  margin-top: auto;
-}
-
-/* Responsive Design */
-@media (max-width: 1024px) {
-  .hero h1 {
-    font-size: 2rem;
-  }
-  .collab {
-    margin: 40px 5%;
-    padding: 60px 15px;
-  }
-}
-
-@media (max-width: 768px) {
-  header nav ul {
-    flex-direction: column;
-    gap: 10px;
-  }
-  .hero, .about, .projects, .contact, .tech-stacks, .on-my-radar {
-    padding: 60px 10px;
-  }
-  .footer-content h3 {
-    font-size: 1.3rem;
-  }
-  .footer-links a {
-    display: block;
-    margin: 8px 0;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero h1 {
-    font-size: 1.6rem;
-  }
-  .collab-btn {
-    padding: 10px 20px;
-    font-size: 0.9rem;
-  }
-  footer {
-    padding: 30px 10px;
-  }
-}
-
-
-
+    #footer p {
+      color: #aaa;
+      font-size: 0.9rem;
+    }
   </style>
 </head>
 <body>
-  <div class="cursor"></div>
-
   <header>
     <h1>Dhruv Jadhav</h1>
     <nav>
@@ -491,87 +350,69 @@ body {
     </nav>
   </header>
 
-  <div class="banner"><img src="https://images.unsplash.com/photo-1673235966910-f2a443bdbaaf?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cHVycGxlJTIwdGVjaHxlbnwwfHwwfHx8MA%3D%3D" alt="banner" /></div>
+  <div class="banner"></div>
 
   <section class="hero" id="home">
-    <img src="https://i.pinimg.com/474x/6e/ec/3a/6eec3a1e1a970151598daf840813ff5e.jpg" alt="Cartoon Walrus" />
+    <img src="https://i.pinimg.com/474x/6e/ec/3a/6eec3a1e1a970151598daf840813ff5e.jpg" alt="Dhruv" />
     <h2>Hey, I’m Dhruv Jadhav</h2>
     <p>Futuristic Developer | Always Learning | Building Cool Stuff 🚀</p>
   </section>
 
   <section class="about" id="about">
     <h2>About Me</h2>
-    <p>I'm Dhruv Jadhav, currently studying at Scaler School of Technology while pursuing my BS in Data Science from IIT Madras. I'm passionate about coding, problem-solving, and web development. Although I’m just starting my journey, I’m eager to learn, adapt, and build cool things that make an impact.</p>
+    <p>I'm Dhruv Jadhav, studying at Scaler School of Technology and pursuing BS in Data Science at IIT Madras. I’m passionate about coding, web dev, and problem-solving — always building something cool.</p>
   </section>
 
-    <!-- Tech Stacks Section -->
   <section class="tech-stacks" id="tech-stacks">
     <h2>Tech Stacks</h2>
     <div class="tech-scroll">
       <div class="tech-track">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" />
-        <!-- Repeat for continuous scroll -->
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" />
+        <img src="https://i.ytimg.com/vi/rvX8cS-v2XM/maxresdefault.jpg" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" />
       </div>
     </div>
   </section>
 
-    <!-- On My Radar Section -->
   <section class="on-my-radar" id="on-my-radar">
     <h2>On My Radar</h2>
     <div class="radar-scroll">
       <div class="radar-track">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="ReactJS" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" alt="Express.js" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" alt="TailwindCSS" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap" />
-        <!-- Repeat for smooth scroll -->
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="ReactJS" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" alt="Express.js" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" alt="TailwindCSS" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" />
+        <img src="https://cdn-useast1.kapwing.com/static/templates/crying-cat-meme-template-full-719a53dc.webp" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" />
       </div>
     </div>
   </section>
 
-
+  
 
   <section class="projects" id="projects">
     <h2>Projects</h2>
     <div class="project-grid">
-      <div class="project" >
-        <img src="https://i.postimg.cc/bNTcpbtS/temp-Image-PC2lk9.avif"  alt="Portfolio Website" />
-        <h3 >Portfolio Website</h3>
-        <p >The site you’re viewing right now! Built with HTML, CSS & minimal JS — futuristic, clean, and interactive.</p>
-        <a href="https://codered-exe.github.io/my_portfolio/"  >CLICK HERE</a>
+      <div class="project">
+        <img src="https://i.postimg.cc/bNTcpbtS/temp-Image-PC2lk9.avif" alt="Portfolio Website" />
+        <h3>Portfolio Website</h3>
+        <p>The site you’re viewing right now! Built with HTML & CSS — futuristic, clean, and interactive.</p>
+        <a href="#">CLICK HERE</a>
       </div>
       <div class="project">
-        <img src="https://i.postimg.cc/CMcs0xKY/temp-Image-HDIQul.avif" alt="AI Project" />
+        <img src="https://i.postimg.cc/CMcs0xKY/temp-Image-HDIQul.avif" alt="AI Chat UI" />
         <h3>AI Chat UI (Coming Soon)</h3>
         <p>A sleek chat interface inspired by futuristic AI design — under development.</p>
       </div>
       <div class="project">
-        <img src="https://img.freepik.com/free-vector/infographic-dashboard-user-panel_52683-30026.jpg?semt=ais_hybrid&w=740&q=80" alt="Dashboard" />
+        <img src="https://img.freepik.com/free-vector/infographic-dashboard-user-panel_52683-30026.jpg" alt="Dashboard" />
         <h3>Interactive Dashboard (Coming Soon)</h3>
-        <p>A cool data dashboard design using modern UI techniques and animations.</p>
+        <p>A cool data dashboard using modern UI and smooth animations.</p>
       </div>
     </div>
   </section>
@@ -581,7 +422,6 @@ body {
     <p>Email: <strong>dhruvjadhav560@gmail.com</strong></p>
     <p>GitHub: <strong>CodeRed-exe</strong></p>
     <p>Instagram: <strong>@dumb.dhruv_</strong></p>
-
     <form>
       <input type="text" placeholder="Your Name" required />
       <input type="email" placeholder="Your Email" required />
@@ -590,48 +430,21 @@ body {
     </form>
   </section>
 
-    <!-- Collaboration Section -->
   <section class="collab">
     <h2>Ready to Collaborate?</h2>
     <p>Whether you’ve got a project in mind or just want to connect, feel free to reach out!</p>
     <a href="#contact" class="collab-btn">Send a Message</a>
   </section>
 
-  <script>
-    // glowing cursor
-    const cursor = document.querySelector('.cursor');
-    document.addEventListener('mousemove', e => {
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top = e.clientY + 'px';
-    });
-
-    // scroll animations
-    const sections = document.querySelectorAll('section');
-    const revealSections = () => {
-      const triggerBottom = window.innerHeight * 0.8;
-      sections.forEach(sec => {
-        const secTop = sec.getBoundingClientRect().top;
-        if (secTop < triggerBottom) sec.classList.add('visible');
-      });
-    };
-    window.addEventListener('scroll', revealSections);
-    revealSections();
-  </script>
-
- <footer id="footer">
-  <h3>Dhruv Jadhav</h3>
-  <div class="footer-links">
-    <a href="mailto:dhruvjadhav560@gmail.com">Email</a>
-    <a href="https://github.com/CodeRed-exe">GitHub</a>
-    <a href="#">LinkedIn</a>
-    <a href="https://www.instagram.com/dumb.dhruv_">Instagram</a>
-  </div>
-  <p>© 2025 Dhruv Jadhav. All rights reserved.</p>
-</footer>
-
-
-
-  
-
+  <footer id="footer">
+    <h3>Dhruv Jadhav</h3>
+    <div class="footer-links">
+      <a href="mailto:dhruvjadhav560@gmail.com">Email</a>
+      <a href="https://github.com/CodeRed-exe">GitHub</a>
+      <a href="#">LinkedIn</a>
+      <a href="https://www.instagram.com/dumb.dhruv_">Instagram</a>
+    </div>
+    <p>© 2025 Dhruv Jadhav. All rights reserved.</p>
+  </footer>
 </body>
 </html>
